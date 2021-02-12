@@ -26,6 +26,9 @@ Me =  1 / (s*Im + Fm);
 Gi = El / (1 + Kt^2*Me*El);
 Gi = minreal(Gi)
 %Current controled with a PI controller.
+%Integrator used to reject the disturbance
+%Zero added to increase the margin phase, 
+%Proportional gain added to increase the frequency. 
 Ci = (34 * (s+1311)) / s
 Wi = (Ci*Gi) / (1 + Ci*Gi)
 
@@ -37,6 +40,7 @@ Gv = minreal(Gv)
 Cv = (2.7988 * (s+6.152)) / s
 Wv = ((Cv*Gv) / (1 + Cv*Gv))*1/s
 Wv = minreal(Wv)
+%Only increased the gain as for increasing the frequency. 
 %position controlled with a proportional gain P.  
 sisotool(Wv)
 Cp = 134.05
